@@ -73,7 +73,29 @@
 				"template": "int main() { {{code}} }"
 			}, {
 				"notIncludes": ["#include <iostream>"],
-				"template": "#include <iostream>\n{{code}}"
+				"template": "#include <iostream>      // I/O streams.
+							#include <string>        // String class.
+							#include <vector>        // Dynamic array.
+							#include <map>           // Ordered key-value map.
+							#include <unordered_map> // Unordered key-value map (hash map).
+							#include <set>           // Ordered unique elements.
+							#include <algorithm>     // Standard algorithms.
+							#include <numeric>       // Numeric operations.
+							#include <memory>        // Smart pointers.
+							#include <utility>       // Utilities like std::pair.
+							#include <fstream>       // File streams.
+							#include <sstream>       // String streams.
+							#include <iomanip>       // I/O manipulators.
+							#include <limits>        // Numeric limits.
+							#include <stdexcept>     // Standard exceptions.
+							#include <functional>    // Function objects.
+							#include <thread>        // Multi-threading.
+							#include <mutex>         // Thread synchronization.
+							#include <chrono>        // Time utilities.
+							#include <filesystem>    // File system access (C++17).
+							#include <cmath>         // Math functions.
+							#include <cstdlib>       // General utilities.
+							int main(){{code}}"
 			}]
 		},
 		"rs": {
