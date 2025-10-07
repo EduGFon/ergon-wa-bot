@@ -73,7 +73,7 @@
 				"template": "int main() { {{code}} }"
 			}, {
 				"notIncludes": ["#include <iostream>"],
-				"template": "#include <iostream>      // I/O streams.
+				"template": `#include <iostream>      // I/O streams.
 							#include <string>        // String class.
 							#include <vector>        // Dynamic array.
 							#include <map>           // Ordered key-value map.
@@ -95,7 +95,7 @@
 							#include <filesystem>    // File system access (C++17).
 							#include <cmath>         // Math functions.
 							#include <cstdlib>       // General utilities.
-							int main(){{code}}"
+							int main(){{code}}`
 			}]
 		},
 		"rs": {
