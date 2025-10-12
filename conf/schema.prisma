@@ -34,22 +34,22 @@ model msgs {
   @@id([author, group])
 }
 
-model BaileysAuthCreds {
-  sessionId String @id
+model authCreds {
+  session   String @id
   data      Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model BaileysAuthKey {
-  sessionId String
+model authKey {
+  session   String
   category  String
-  keyId     String
+  key       String
   data      Json?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@id([sessionId, category, keyId])
-  @@index([sessionId, category])
+  @@id([session, category, key])
+  @@index([session, category])
 }
