@@ -1,0 +1,13 @@
+- Update prisma library to the next major update (7.xx.xx) (https://pris.ly/d/major-version-upgrade)
+- Update pino library to the next major update (10.xx.xx)
+- Add IDs to any Gemini Memory
+- Store group keys before sending msgs
+- Store data cache
+- Limit memory usage
+- Try running Ergon on Bun
+- Ask the user for their language when user text .lang
+- Try using Gemini 3 on .gemini
+- Add a cmd to delete reminders (aka remind delete)
+- Add a gotcha cmd
+- Explain cookies.txt needing in README
+- Fix memory increasing bug
