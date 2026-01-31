@@ -40,22 +40,21 @@ async function startTyping(this: str) {
 }
 
 // simple abstraction to send a msg
-async function send(this: str, text: str | AnyMessageContent, user?: User) {
-	// reply?: baileys.proto.IWebMessageInfo)
+async function send(this: str, text: str | AnyMessageContent, opts?: { user?: User, quoted?: Msg }) {
 	let content = text
 
 	if (typeof text === 'string') {
 		// it's a string, so it can be a text or a template string
 
-		if (user) {
+		if (opts?.user) {
 			// it's a template string, so we can use user's lang
-			const t = getFixedT(user.lang)
+			const t = getFixedT(opts.user.lang)
 
 			if (text.startsWith('usage.')) { // it's a cmd usage
 				text = text.replace('usage.', '')
 
 				cache.cmds.get('help')!.run(
-					{ args: [text], send: send.bind(this), user, t } as CmdCtx,
+					{ args: [text], send: send.bind(this), user: opts?.user, t } as CmdCtx,
 				)
 				// run help cmd to get cmd usage
 				return {} as CmdCtx
@@ -67,8 +66,7 @@ async function send(this: str, text: str | AnyMessageContent, user?: User) {
 
 	const msg = await bot.sock.sendMessage(
 		!this.includes('@') ? this + '@s.whatsapp.net' : this,
-		content as AnyMessageContent,
-	) //, quote)
+		content as AnyMessageContent, { quoted: opts?.quoted })
 
 	// convert raw msg on cmd context
 	return await getCtx(msg!)
@@ -101,9 +99,9 @@ async function deleteMessage(this: Msg | proto.IMessageKey) {
 type StreamMsg = { msg: any }
 // sendOrEdit: send a message or edit it if it was already sent
 // this is used to edit the message while the AI is writing
-async function sendOrEdit(data: StreamMsg, text: str) {
+async function sendOrEdit(data: StreamMsg, text: str, quoted?: Msg) {
 	if (data.msg?.key?.id) {
 		await editMsg.bind(data.msg)(text).catch((e) => print('Failed to edit message', e))
-	} else if (text) data.msg = (await send.bind(data.msg.chat)(text)).msg
+	} else if (text) data.msg = (await send.bind(data.msg.chat)(text, { quoted })).msg
 	return
 }
