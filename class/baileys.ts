@@ -22,7 +22,7 @@ export default class Baileys {
 	async connect() {
 		print('CREDS', 'Initializing new auth state', 'green')
 		// Use saved session (otherwise you'll need to log in again every time)
-		const { state, saveCreds } = await authState() //process.env.DATABASE_URL
+		const { state, saveCreds } = await postgresAuthState('0') //process.env.DATABASE_URL
 		//? await postgresAuthState('0') // save auth creds/keys on db
 		// using postgresAuthState will avoid MANY problems you will
 		// encounter using the file system auth storing
