@@ -33,7 +33,7 @@ async function folderHandler(path: str, handler: Func) {
 
 async function loadCmds() {
 	cache.cmds.clear()
-	await folderHandler(`./build/cmd`, (file: str, _category: str, imported: any) => {
+	await folderHandler(`./conf/gen/build/cmd`, (file: str, _category: str, imported: any) => {
 		const cmd: Cmd = new imported()
 
 		cmd.name = file.slice(0, -3) // remove .ts
@@ -45,7 +45,7 @@ async function loadCmds() {
 async function loadEvents() {
 	cache.events.clear()
 
-	await folderHandler(`./build/event`, (file: str, category: str, imported: any) => {
+	await folderHandler(`./conf/gen/build/event`, (file: str, category: str, imported: any) => {
 		const event = imported
 		const name = `${category}.${file.slice(0, -3)}` as keyof BaileysEventMap
 		// folder+file names are the same of lib events

@@ -18,7 +18,7 @@
 	},
 	"exclude": [
 		"test",
-		"build",
+		"conf/gen/build",
 		"!plugin/*.ts",
 		"plugin/copilot.ts",
 		"temp"
