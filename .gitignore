@@ -1,11 +1,11 @@
 # Generated
 conf/gen/auth/*
 conf/gen/build
-# conf/gen/cache/*
+conf/gen/cache/*
 conf/gen/log
 conf/gen/prisma/*
 conf/gen/python/*
-# conf/gen/temp/*
+conf/gen/temp/*
 cookies.txt
 out.log
 
