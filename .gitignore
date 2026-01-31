@@ -10,6 +10,7 @@ cookies.txt
 build
 rollback
 generated
+gen
 node_modules
 
 # Logs / Lock
