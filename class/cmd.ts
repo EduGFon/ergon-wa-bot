@@ -50,14 +50,16 @@ export default abstract class Cmd {
 		if (group) { // if msg chat is a group
 			if (!this.access.groups) return react('block') // this cmd can't run on groups
 
-			const admins = group.members.map((m) => m.admin && m.id) || []
 			// all group admins id
+			const admins = group.members.map((m) => m.admin && m.id) || []
 
+			// this user is not an admin and can't run this cmd
 			if (this.access.admin && (!admins.includes(user.lid) && !isDev)) {
 				return react('prohibited') // Devs can use admin cmds for security reasons
 			}
 
-			if (this.access.botAdmin && !admins.includes(bot.sock.user?.lid)) {
+			// bot is not an admin and can't run this cmd
+			if (this.access.botAdmin && !admins.includes(bot.lid)) {
 				return react('alert')
 			}
 		} else if (!this.access.dm) return react('block') // this cmd can't run on DMs

@@ -15,6 +15,7 @@ import authState from '../plugin/authStorage.js'
 import { logger } from '../util/proto.js'
 
 export default class Baileys {
+	lid: str = ''
 	sock!: WASocket
 	// sock is the real Baileys connection
 	constructor() {}
@@ -48,5 +49,8 @@ export default class Baileys {
 
 		// save login creds
 		this.sock.ev.on('creds.update', saveCreds)
+
+		// set bot lid
+		this.lid = this.sock.user?.lid?.split(':')[0] + '@lid'
 	}
 }
