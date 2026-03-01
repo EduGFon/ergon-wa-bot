@@ -35,7 +35,7 @@ async function getCtx(raw: proto.IWebMessageInfo): Promise<CmdCtx> {
 	if (key.remoteJid?.includes('@g.us')) group = await getGroup(key.remoteJid)
 
 	let lid = key?.participant
-	if (!lid) lid = key.fromMe ? bot.sock.user?.id : key.remoteJid!
+	if (!lid) lid = key.fromMe ? bot.sock.user?.lid : key.remoteJid!
 	if (lid?.includes(':')) {
 		const splitted = lid.split(':')
 		lid = splitted[0] + '@' + splitted[1].split('@')[1]
