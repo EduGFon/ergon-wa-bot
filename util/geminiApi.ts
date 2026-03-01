@@ -9,6 +9,7 @@ import { GoogleFile, Gparams } from '../conf/types/types.js'
 import { randomDelay, randomTime } from './functions.js'
 import { createMemories } from '../plugin/memories.js'
 import { createAlarms } from '../plugin/alarms.js'
+import { ThinkingLevel } from '@google/genai'
 import { sendOrEdit } from './messages.js'
 import { delay, User } from '../map.js'
 
@@ -79,21 +80,25 @@ async function handleResponse(chunk: GenerateContentResponse, msg: AIMsg, startS
 
 function getModelConfig(user: User) {
 	return {
-		tools: [{ googleSearch: {} }],
+		tools: [
+			// { googleSearch: {} },
+			{ urlContext: {} },
+			// { codeExecution: {} },
+		],
+		thinkingConfig: { thinkingLevel: ThinkingLevel.HIGH },
 		systemInstruction: [
 			'> Você deve seguir as configurações padrão se o usuário ou uma memória não especificá-las',
-			'- Não use raciocínio, exceto para transcrições',
 			'- Use o máximo de raciocínio para transcrições',
 			'- Gere respostas extremamente curtas e resumidas com no máximo 1 frase',
 			'- Use formatação do WhatsApp',
 			'- Destaque informações importantes do texto com *, _ ou `',
-			'> Escreva uma memória quando o usuário pedir que você lembre de algo ou quando te der uma informação importante',
-			'Modelo de Memória: "{MEMORY:message}"',
-			'Exemplo: "{MEMORY:O nome do usuário é Pedro}"',
-			'Se um usuário pedir para que você o lembre de algo daqui a algum tempo, você deve criar um alarme com uma mensagem MUITO engraçada',
-			'Use apenas durações relativas: anos (y), meses (mo), semanas (w), dias (d), horas (h), minutos (m) ou segundos (s)',
-			'Modelo de Alarme: "{ALARM:text:duration}"',
-			'Exemplo: "{ALARM:Desliga o forno senão vai explodir:1h}"',
+			'# Escreva uma memória quando o usuário pedir que você lembre de algo ou quando te der uma informação importante',
+			'# Modelo de Memória: "{MEMORY:message}"',
+			'# Exemplo: "{MEMORY:O nome do usuário é Pedro}"',
+			'# Se um usuário pedir para que você o lembre de algo daqui a algum tempo, você deve criar um alarme com uma mensagem MUITO engraçada',
+			'# Use apenas durações relativas: anos (y), meses (mo), semanas (w), dias (d), horas (h), minutos (m) ou segundos (s)',
+			'# Modelo de Alarme: "{ALARM:text:duration}"',
+			'# Exemplo: "{ALARM:Desliga o forno senão vai explodir:1h}"',
 			'Memórias do usuário:',
 			...user.memories,
 		],

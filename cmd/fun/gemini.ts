@@ -33,7 +33,7 @@ export default class extends Cmd {
 
 		if (args[0] === this.subCmds[2]) { // use pro model
 			if (!args[1]) return send('Por favor escreva um prompt')
-			model = defaults.ai.gemini_chain[2]
+			model = defaults.ai.gemini_pro
 			args.shift()
 		}
 		await startTyping()
