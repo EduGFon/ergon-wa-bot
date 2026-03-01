@@ -93,7 +93,6 @@ function numPrototypes() {
 			},
 		},
 	})
-	return
 }
 
 function strPrototypes() {
@@ -203,5 +202,4 @@ function strPrototypes() {
 			},
 		},
 	})
-	return
 }
